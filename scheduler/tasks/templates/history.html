@@ -1,0 +1,35 @@
+{% extends "index.html" %}
+
+{% block title %} History | {{ request.user }} {% endblock %}
+
+{% block content %}
+<h2 class="center">History</h2>
+<div class="row">
+  <div class="col s12 m10 l6 offset-l3 offset-m1">
+    <div class="card z-depth-0">
+      <div class="card-content">
+		<ul class="collection">
+			{% for plan in plans %}
+				{% if plan.status %}
+					<li class="collection-item avatar">
+						<i class="material-icons circle green">done_all</i>
+					  <span class="title" style="font-weight: bold;">{{ plan.task.content }}</span>
+					  <p>{{ plan.date|date:"D\d\a\y d M, Y" }}
+					  </p>
+					</li>
+				{% else %}
+					<li class="collection-item avatar">
+					<i class="material-icons circle red">priority_high</i>
+					  <span class="title" style="font-weight: bold;">{{ plan.task.content }}</span>
+					  <p>{{ plan.date|date:"D\d\a\y d M, Y" }}
+					  </p>
+					</li>
+				{% endif %}
+			{% endfor %}
+		</ul>            
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
