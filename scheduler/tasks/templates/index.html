@@ -17,8 +17,7 @@
      <nav class="deep-orange darken-2">
       <div class="nav-wrapper">
         <a href="/" class="brand-logo center">My Plans</a>
-        <ul id="nav-mobile" class="left hide-on-med-and-down">
-          <li>{{ request.user }}</li>
+        <ul id="nav-mobile" class="left">
           <li><a href="{% url 'tasks:history' %}">History</a></li>
         </ul>
       </div>
