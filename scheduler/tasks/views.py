@@ -15,7 +15,7 @@ def home(request):
 	plans = Schedule.objects.filter(user=request.user, date=datetime.today())
 	if not plans.exists():
 		for task in Task.objects.all():
-			Task.objects.create(user=request.user, date=datetime.today(), task=task)
+			Schedule.objects.create(user=request.user, date=datetime.today(), task=task)
 		plans = Schedule.objects.filter(user=request.user, date=datetime.today())
 
 	context = {
