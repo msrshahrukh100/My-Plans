@@ -7,6 +7,10 @@ from django.contrib.auth.decorators import login_required
 from .models import Schedule, Task
 from django.utils.timezone import datetime
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import authentication, permissions
+from .utils import get_data_of_user
 
 # Create your views here.
 @login_required
@@ -41,3 +45,14 @@ def history(request):
 	plans = Schedule.objects.all()
 	context = {"plans": plans}
 	return render(request, "history.html", context)
+
+def analysis(request):
+	return render(request, "analysis.html", {})
+
+
+class AnalysisData(APIView):
+
+    def get(self, request, format=None):
+		data = get_data_of_user(request.user)
+		return Response(data)
+

@@ -1,0 +1,51 @@
+{% extends "index.html" %}
+
+{% block title %} History | {{ request.user }} {% endblock %}
+
+{% block content %}
+
+<h2 class="center">Analysis</h2>
+<canvas id="myChart" width="400" height="400" data-actionurl="{% url 'tasks:get_analysis_data' %}"></canvas>
+{% endblock %}
+
+{% block extra_scripts %}
+
+<script type="text/javascript">
+var ctx = document.getElementById("myChart").getContext('2d');
+
+var backgroundColor = [];
+var borderColor = [];
+
+$.ajax({
+	type: 'GET',
+	url: $('#myChart').attr('data-actionurl'),
+	success: function(data){
+		var myChart = new Chart(ctx, {
+		    type: 'bar',
+		    data: {
+		        labels: data['labels'],
+		        datasets: [{
+		            label: '# of Votes',
+		            data: data['values'],
+		            backgroundColor: data["color"],
+		            borderColor: data["border_color"],
+		            borderWidth: 1
+		        }]
+		    },
+		    options: {
+		        scales: {
+		            yAxes: [{
+		                ticks: {
+		                    beginAtZero:true
+		                }
+		            }]
+		        }
+		    }
+		});
+	}
+})
+
+</script>
+
+{% endblock %}
+

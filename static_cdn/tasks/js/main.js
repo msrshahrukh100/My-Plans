@@ -1,4 +1,7 @@
 $(function(){
+
+    $('.sidenav').sidenav();
+    
 	$('.task').on('change', function(){
 		$.ajax({
 			type: 'GET',
@@ -11,4 +14,5 @@ $(function(){
 			}
 		})
 	})
+
 });
