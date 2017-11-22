@@ -15,6 +15,7 @@ class ScheduleManager(admin.ModelAdmin):
 
 class CustomizationManager(admin.ModelAdmin):
 	list_display = ['color', 'border_color']
+	list_editable = ['color', 'border_color']
 
 admin.site.register(Task, TaskAdmin)
 admin.site.register(Schedule, ScheduleManager)
