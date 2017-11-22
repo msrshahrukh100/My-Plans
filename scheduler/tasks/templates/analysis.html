@@ -21,7 +21,7 @@ $.ajax({
 	url: $('#myChart').attr('data-actionurl'),
 	success: function(data){
 		var myChart = new Chart(ctx, {
-		    type: 'bar',
+		    type: 'horizontalBar',
 		    data: {
 		        labels: data['labels'],
 		        datasets: [{
