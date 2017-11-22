@@ -5,7 +5,11 @@
 {% block content %}
 
 <h2 class="center">Analysis</h2>
-<canvas id="myChart" width="400" height="400" data-actionurl="{% url 'tasks:get_analysis_data' %}"></canvas>
+<div class="row">
+	<div class="col s12 m10 l10 offset-l1 offset-m1">
+		<canvas id="myChart" width="400" height="400" data-actionurl="{% url 'tasks:get_analysis_data' %}"></canvas>
+	</div>
+</div>
 {% endblock %}
 
 {% block extra_scripts %}
@@ -25,7 +29,7 @@ $.ajax({
 		    data: {
 		        labels: data['labels'],
 		        datasets: [{
-		            label: '# of Votes',
+		            label: '% of days Days accomplished',
 		            data: data['values'],
 		            backgroundColor: data["color"],
 		            borderColor: data["border_color"],
