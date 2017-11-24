@@ -4,10 +4,11 @@
 
 {% block content %}
 
+
 <h2 class="center">Analysis</h2>
 <div class="row">
 	<div class="col s12 m10 l10 offset-l1 offset-m1">
-		<canvas id="myChart" width="400" height="400" data-actionurl="{% url 'tasks:get_analysis_data' %}"></canvas>
+		<div id="barchart_values" data-actionurl="{% url 'tasks:get_analysis_data' %}"></div>
 	</div>
 </div>
 {% endblock %}
@@ -15,46 +16,30 @@
 {% block extra_scripts %}
 
 <script type="text/javascript">
-var ctx = document.getElementById("myChart").getContext('2d');
 
-var backgroundColor = [];
-var borderColor = [];
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var jsonData = $.ajax({
+          url: $('#barchart_values').attr('data-actionurl'),
+          dataType: "json",
+          async: false
+          }).responseText;
+      var data = new google.visualization.DataTable(jsonData);
+      var view = new google.visualization.DataView(data);
+      var options = {
+                title: "% of days task accomplished",
+                subtitle: 'in millions of dollars (USD)',
+                width: 800,
+                height: 800,
+                bar: {groupWidth: "95%"},
+                legend: { position: 'bottom' },
+                colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6'],
+              };
 
-$.ajax({
-	type: 'GET',
-	url: $('#myChart').attr('data-actionurl'),
-	success: function(data){
-		var myChart = new Chart(ctx, {
-		    type: 'horizontalBar',
-		    data: {
-		        labels: data['labels'],
-		        datasets: [{
-		            label: '% of days Days accomplished',
-		            data: data['values'],
-		            backgroundColor: data["color"],
-		            borderColor: data["border_color"],
-		            borderWidth: 1
-		        }]
-		    },
-		    options: {
-		        scales: {
-		            yAxes: [{
-		                ticks: {
-		                    beginAtZero:true
-		                }
-		            }]
-		        }
-		    },
-			plugins: [{
-			  beforeDraw: function(c) {
-			     var chartHeight = c.chart.height;
-			     c.scales['y-axis-0'].options.ticks.fontSize = chartHeight * 1 / 100; //fontSize: 6% of canvas height
-			  }
-			}]
-		});
-	}
-})
-
+      var chart = new google.visualization.BarChart(document.getElementById('barchart_values'));
+      chart.draw(view, options);
+    }
 </script>
 
 {% endblock %}

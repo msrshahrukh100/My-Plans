@@ -53,6 +53,5 @@ def analysis(request):
 class AnalysisData(APIView):
 
     def get(self, request, format=None):
-		data = get_data_of_user(request.user)
-		return Response(data)
+		return Response(get_data_of_user(request.user))
 
