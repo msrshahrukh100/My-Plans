@@ -15,6 +15,7 @@ class Task(models.Model):
 	content = models.TextField()
 	slug = AutoSlugField(populate_from='content')
 	order = models.IntegerField()
+	color = models.CharField(max_length=255)
 
 	objects = TaskManager()
 
@@ -34,11 +35,5 @@ class Schedule(models.Model):
 	def __str__(self):
 		return str(self.task)
 
-class Customizations(models.Model):
-	color = models.CharField(max_length=255)
-	border_color = models.CharField(max_length=255)
-
-	def __str__(self):
-		return str(self.id)
 
 

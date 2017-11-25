@@ -17,29 +17,23 @@
 
 <script type="text/javascript">
 
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-      var jsonData = $.ajax({
-          url: $('#barchart_values').attr('data-actionurl'),
-          dataType: "json",
-          async: false
-          }).responseText;
-      var data = new google.visualization.DataTable(jsonData);
-      var view = new google.visualization.DataView(data);
-      var options = {
-                title: "% of days task accomplished",
-                subtitle: 'in millions of dollars (USD)',
-                width: 800,
-                height: 800,
-                bar: {groupWidth: "95%"},
-                legend: { position: 'bottom' },
-                colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6'],
-              };
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var jsonData = $.ajax({
+      url: $('#barchart_values').attr('data-actionurl'),
+      dataType: "json",
+      async: false
+    }).responseText;
+    var options = {
+      title: "% of days task accomplished",
+      legend: { position: 'none' }
+    };
+    var data = new google.visualization.DataTable(jsonData);
 
-      var chart = new google.visualization.BarChart(document.getElementById('barchart_values'));
-      chart.draw(view, options);
-    }
+    var chart = new google.visualization.BarChart(document.getElementById('barchart_values'));
+    chart.draw(data, options);
+  }
 </script>
 
 {% endblock %}
