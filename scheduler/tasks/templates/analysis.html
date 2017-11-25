@@ -32,8 +32,9 @@
             subtitle: '% of days the targets are accomplished',
           },
           bars: 'horizontal', // Required for Material Bar Charts.
-          bar: { groupWidth: '95%' },
+          bar: { groupWidth: '75%' },
           colors: colors,
+          height: JSON.parse(jsonData).height
         };
 
     var chart = new google.charts.Bar(document.getElementById('barchart_values'));
