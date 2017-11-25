@@ -17,7 +17,7 @@
 
 <script type="text/javascript">
 
-  google.charts.load('current', {'packages':['corechart']});
+  google.charts.load('current', {'packages':['bar', 'corechart']});
   google.charts.setOnLoadCallback(drawChart);
   function drawChart() {
     var jsonData = $.ajax({
@@ -25,14 +25,23 @@
       dataType: "json",
       async: false
     }).responseText;
+    colors = JSON.parse(jsonData).colors
     var options = {
-      title: "% of days task accomplished",
-      legend: { position: 'none' }
-    };
-    var data = new google.visualization.DataTable(jsonData);
+          chart: {
+            title: 'Success Scores',
+            subtitle: '% of days the targets are accomplished',
+          },
+          bars: 'horizontal', // Required for Material Bar Charts.
+          bar: { groupWidth: '95%' },
+          colors: colors,
+        };
 
-    var chart = new google.visualization.BarChart(document.getElementById('barchart_values'));
-    chart.draw(data, options);
+    var chart = new google.charts.Bar(document.getElementById('barchart_values'));
+
+    var data = new google.visualization.DataTable(jsonData);
+    chart.draw(data, google.charts.Bar.convertOptions(options));
+
+
   }
 </script>
 

@@ -16,16 +16,19 @@ def get_data_of_user(user):
 	        {"role":"style","type":"string"}
 	      ]
 	rows = []
+	colors = []
 	for task in Task.objects.all() :
+		colors.append(task.color)
 		rows.append({"c":[
 			{"v":task.content},
 			{"v":get_total_percent_data(task, user)},
-			{"v":task.color}
+			{"v":task.color},
 			]})
 
 	data = {
 	  "cols": columns,
-	  "rows": rows
+	  "rows": rows,
+	  "colors" : colors,
 	}
 	return data
 
