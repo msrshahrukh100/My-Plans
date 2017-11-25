@@ -29,7 +29,7 @@ def get_data_of_user(user):
 	  "cols": columns,
 	  "rows": rows,
 	  "colors" : colors,
-	  "height" : Task.objects.all().count() * 100
+	  "height" : Task.objects.all().count() * 70
 	}
 	return data
 
