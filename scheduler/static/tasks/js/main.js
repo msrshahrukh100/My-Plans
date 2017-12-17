@@ -15,4 +15,7 @@ $(function(){
 		})
 	})
 
+	// for the tabs
+	$('.tabs').tabs();
+
 });

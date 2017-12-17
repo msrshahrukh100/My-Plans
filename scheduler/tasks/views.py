@@ -48,7 +48,10 @@ def history(request):
 
 def analysis(request):
 	context = {
-	"user_data" : get_data_of_user(request.user)
+	"user_data_past_day" : get_data_of_user(request.user, dayspast=1),
+	"user_data_past_week" : get_data_of_user(request.user, dayspast=7),
+	"user_data_past_month" : get_data_of_user(request.user, dayspast=30),
+	"user_data_forever" : get_data_of_user(request.user)
 	}
 	return render(request, "analysis.html", context)
 

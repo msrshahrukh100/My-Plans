@@ -8,8 +8,20 @@
 <h2 class="center">Analysis</h2>
 <div class="row">
 	<div class="col s12 m10 l10 offset-l1 offset-m1">
-		<div id="analysis_values" data-actionurl="{% url 'tasks:get_analysis_data' %}">
-      {% for data in user_data %}
+    <div class="row">
+      <div class="col s12">
+        <ul class="tabs">
+          <li class="tab col s3"><a class="active" href="#test1">Past Day</a></li>
+          <li class="tab col s3"><a href="#test2">Past 7 days</a></li>
+          <li class="tab col s3"><a href="#test3">Past 30 days</a></li>
+          <li class="tab col s3"><a href="#test4">Beginning of Time</a></li>
+        </ul>    
+      </div>
+    </div>
+    <div id="test1" class="col s12">
+      <h5 class="center">Past day record</h5>
+      <br>
+      {% for data in user_data_past_day %}
         <div class="row">
           <div class="col l5 m5 s5">
             <b>{{ data.name }}</b>
@@ -28,8 +40,77 @@
         <br>
       {% endfor %}
     </div>
+    <div id="test2" class="col s12">
+      <h5 class="center">Past 7 days record</h5>
+      <br>
+      {% for data in user_data_past_week %}
+        <div class="row">
+          <div class="col l5 m5 s5">
+            <b>{{ data.name }}</b>
+          </div>
+          <div class="col l1 m1 s1 hide-on-small-only">
+            {{ data.percent_completed|floatformat:2 }} %
+          </div>
+          <div class="col l6 m6 s7">
+            <div class="progress">
+              <div class="determinate {{ data.color }} right" style="width: {{ data.percent_completed }}%">
+              </div>
+            </div>    
+          </div>
+        </div>
+        <br>
+        <br>
+      {% endfor %}
+    </div>
+    <div id="test3" class="col s12">
+      <h5 class="center">Past 30 days record</h5>
+      <br>
+      {% for data in user_data_past_month %}
+        <div class="row">
+          <div class="col l5 m5 s5">
+            <b>{{ data.name }}</b>
+          </div>
+          <div class="col l1 m1 s1 hide-on-small-only">
+            {{ data.percent_completed|floatformat:2 }} %
+          </div>
+          <div class="col l6 m6 s7">
+            <div class="progress">
+              <div class="determinate {{ data.color }} right" style="width: {{ data.percent_completed }}%">
+              </div>
+            </div>    
+          </div>
+        </div>
+        <br>
+        <br>
+      {% endfor %}
+    </div>
+    <div id="test4" class="col s12">
+      <h5 class="center">From beginning of time</h5>
+      <br>
+      {% for data in user_data_forever %}
+        <div class="row">
+          <div class="col l5 m5 s5">
+            <b>{{ data.name }}</b>
+          </div>
+          <div class="col l1 m1 s1 hide-on-small-only">
+            {{ data.percent_completed|floatformat:2 }} %
+          </div>
+          <div class="col l6 m6 s7">
+            <div class="progress">
+              <div class="determinate {{ data.color }} right" style="width: {{ data.percent_completed }}%">
+              </div>
+            </div>    
+          </div>
+        </div>
+        <br>
+        <br>
+      {% endfor %}
+    </div>
+
+
 	</div>
 </div>
+
 {% endblock %}
 
 {% block extra_scripts %}
