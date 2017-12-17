@@ -14,12 +14,13 @@
           <div class="col l5 m5 s5">
             <b>{{ data.name }}</b>
           </div>
-          <div class="col l1 m1 s1">
+          <div class="col l1 m1 s1 hide-on-small-only">
             {{ data.percent_completed|floatformat:2 }} %
           </div>
-          <div class="col l6 m6 s5">
-            <div class="progress right">
-              <div class="determinate {{ data.color }}" style="width: {{ data.percent_completed }}%"></div>
+          <div class="col l6 m6 s7">
+            <div class="progress">
+              <div class="determinate {{ data.color }} right" style="width: {{ data.percent_completed }}%">
+              </div>
             </div>    
           </div>
         </div>
