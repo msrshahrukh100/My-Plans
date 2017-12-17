@@ -10,7 +10,7 @@ from django.utils.timezone import datetime
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import authentication, permissions
-from .utils import get_data_of_user
+from api.utils import get_data_of_user
 
 # Create your views here.
 @login_required
@@ -47,7 +47,10 @@ def history(request):
 	return render(request, "history.html", context)
 
 def analysis(request):
-	return render(request, "analysis.html", {})
+	context = {
+	"user_data" : get_data_of_user(request.user)
+	}
+	return render(request, "analysis.html", context)
 
 
 class AnalysisData(APIView):

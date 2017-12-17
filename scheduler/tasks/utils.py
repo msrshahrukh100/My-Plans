@@ -1,4 +1,4 @@
-from .models import Task
+from ..models import Task
 
 
 def get_total_percent_data(task, user):

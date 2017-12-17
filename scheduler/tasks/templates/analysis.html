@@ -8,43 +8,30 @@
 <h2 class="center">Analysis</h2>
 <div class="row">
 	<div class="col s12 m10 l10 offset-l1 offset-m1">
-		<div id="barchart_values" data-actionurl="{% url 'tasks:get_analysis_data' %}"></div>
+		<div id="analysis_values" data-actionurl="{% url 'tasks:get_analysis_data' %}">
+      {% for data in user_data %}
+        <div class="row">
+          <div class="col s5">
+            <b>{{ data.name }}</b>
+          </div>
+          <div class="col s1">
+            {{ data.percent_completed|floatformat:2 }} %
+          </div>
+          <div class="col s6">
+            <div class="progress">
+              <div class="determinate {{ data.color }}" style="width: {{ data.percent_completed }}%"></div>
+            </div>    
+          </div>
+        </div>
+        <br>
+        <br>
+      {% endfor %}
+    </div>
 	</div>
 </div>
 {% endblock %}
 
 {% block extra_scripts %}
-
-<script type="text/javascript">
-
-  google.charts.load('current', {'packages':['bar', 'corechart']});
-  google.charts.setOnLoadCallback(drawChart);
-  function drawChart() {
-    var jsonData = $.ajax({
-      url: $('#barchart_values').attr('data-actionurl'),
-      dataType: "json",
-      async: false
-    }).responseText;
-    colors = JSON.parse(jsonData).colors
-    var options = {
-          chart: {
-            title: 'Success Scores',
-            subtitle: '% of days the targets are accomplished',
-          },
-          bars: 'horizontal', // Required for Material Bar Charts.
-          bar: { groupWidth: '90%' },
-          colors: colors,
-          height: JSON.parse(jsonData).height
-        };
-
-    var chart = new google.charts.Bar(document.getElementById('barchart_values'));
-
-    var data = new google.visualization.DataTable(jsonData);
-    chart.draw(data, google.charts.Bar.convertOptions(options));
-
-
-  }
-</script>
 
 {% endblock %}
 
