@@ -1,0 +1,50 @@
+{% extends "index.html" %}
+
+{% block title %} History | {{ request.user }} {% endblock %}
+
+{% block content %}
+{% for emotion in emotions%}
+{{ emotion.name }}
+{% endfor %}
+
+<h2 class="center">What are your emotions ?</h2>
+
+<div class="row">
+	<div class="col s12 m10 l10 offset-l1 offset-m1">
+		{% for ej in emotion_journals %}
+		 <div class="row">
+		    <div class="col l8 s12 m10 offset-l2 offset-m1">
+		      <div class="card">
+		        <div class="card-content">
+		        	<div class="center">
+		        		{% for emotion_before in ej.emotions_before.all %}
+			        	 <div class="chip">
+						    {{ emotion_before.emotion.first.emoticon }} &nbsp
+						    {{ emotion_before.name }} 
+						  </div>
+						{% endfor %}
+		        	</div>
+		        	<div class="section"></div>
+		          <h5 class="center">
+		          	{{ ej.situation }}
+			      </h5>
+			      <div class="section"></div>
+			      <div class="center">
+		        		{% for emotion_after in ej.emotions_after.all %}
+			        	 <div class="chip">
+						    {{ emotion_after.emotion.first.emoticon }} &nbsp
+						    {{ emotion_after.name }} 
+						  </div>
+						{% endfor %}
+		        	</div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		 {% endfor %}
+	</div>
+</div>
+
+
+{% endblock %}
+

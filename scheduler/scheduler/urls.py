@@ -22,6 +22,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('tasks.urls', namespace="tasks")),
+
+    # from the utility apps
+    url(r'emotion-tracker/', include('utility_apps.emotion_tracker.urls', namespace="emotionapp")),
 ]
 
 

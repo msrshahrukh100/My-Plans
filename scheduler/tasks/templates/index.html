@@ -21,10 +21,15 @@
         <ul class="left hide-on-med-and-down">
           <li><a href="{% url 'tasks:history' %}">History</a></li>
           <li><a href="{% url 'tasks:analysis' %}">Analyze</a></li>
+          <li><a href="{% url 'emotionapp:add_emotion' %}">Emotion Journal</a></li>
+          <li><a href="{% url 'emotionapp:emotion' %}">Emotions</a></li>
         </ul>
         <ul class="sidenav" id="mobile-demo">
           <li><a href="{% url 'tasks:history' %}">History</a></li>
           <li><a href="{% url 'tasks:analysis' %}">Analyze</a></li>
+          <li><a href="{% url 'emotionapp:add_emotion' %}">Emotion Journal</a></li>
+          <li><a href="{% url 'emotionapp:emotion' %}">Emotions</a></li>
+
         </ul>
       </div>
     </nav>
@@ -52,7 +57,7 @@
 
       <div class="fixed-action-btn">
         <a class="btn-floating btn-large red" id='todays-score' data-url="{% url 'tasks:get_todays_score' %}" onclick="showtoast('Today', 0)">
-          90%
+          
         </a>
         <ul id="score-elements">
           {% for record in ndays_record %}
@@ -69,12 +74,21 @@
 
  
     <!--JavaScript at end of body for optimized loading-->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.1/js/materialize.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.2/js/materialize.min.js"></script>
   <script src="{% static 'tasks/js/main.js' %}" type="text/javascript"></script>
+  <script src="{% static 'tasks/js/main2.js' %}" type="text/javascript"></script>
+
   <script type="text/javascript">
     function showtoast(day, score){
-    M.toast({html: day + "'s score is " + String(score) + "%"});
+      if (score == 0)
+      {
+        M.toast({html: "Today's score"});
+      }
+      else
+      {
+        M.toast({html: day + "'s score is " + String(score) + "%"});
+      }
   }
   </script>
   {% block extra_scripts %}

@@ -1,0 +1,81 @@
+{% extends "index.html" %}
+
+{% block title %} History | {{ request.user }} {% endblock %}
+
+{% block content %}
+{% for emotion in emotions%}
+{{ emotion.name }}
+{% endfor %}
+
+<h2 class="center">What are your emotions ?</h2>
+
+<div class="row">
+	<div class="col s12 m10 l10 offset-l1 offset-m1">
+		<form method="POST">{% csrf_token %}
+			<div class="row">
+				<label class="col s12 center" for="{{ form.emotions_before.id_for_label }}">Emotions Before:</label>
+				 <div class="chips chips-autocomplete col l6 offset-l3 m10 offset-m1 s12">
+				    {{ form.emotions_before }}
+				</div>
+			</div>
+			<div class="row">
+				<label class="col s12 center" for="{{ form.emotions_before.id_for_label }}">Situation:</label>
+				<div class="col l6 offset-l3 m10 offset-m1 s12">
+					{{ form.situation }}
+				</div>
+			</div>
+			<div class="row">
+				<label class="col s12 center" for="{{ form.emotions_after.id_for_label }}">Emotions After:</label>
+				 <div class="chips chips-autocomplete col l6 offset-l3 m10 offset-m1 s12">
+				    {{ form.emotions_after }}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s4 offset-s4">
+					<button class="btn waves-effect waves-light center" type="submit" name="action">Journal
+					<i class="material-icons right">send</i>
+					</button>
+				</div>
+			</div>
+			</div>
+		        
+		</form>
+	</div>
+</div>
+
+ <div class="chips chips-autocomplete">
+    <input class="custom-class">
+</div>
+
+ <!-- <div class="chips chips-autocomplete"></div> -->
+
+{% endblock %}
+{% block extra_scripts %}
+<script type="text/javascript">
+	var jsonData = $.ajax({
+		url: '/emotion-tracker/get-all-emotions',
+		dataType: "json",
+		async: false
+	}).responseText;
+
+	jsonData = JSON.parse(jsonData)
+
+	var autocompleteData = {} ;
+
+	$.each(jsonData['emotions'], function(key, value){
+		autocompleteData[value] = null;
+	});
+
+
+  $('.chips-autocomplete').chips({
+    	
+    autocompleteOptions: {
+
+
+      data: autocompleteData,
+      limit: Infinity,
+      minLength: 1
+    }
+  });
+</script>
+  {% endblock %}

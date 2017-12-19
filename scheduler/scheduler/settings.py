@@ -38,8 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'taggit',
+    
     # user defined
     'tasks',
+
+    # utility apps
+    'utility_apps.emotion_tracker',
 ]
 
 MIDDLEWARE = [
