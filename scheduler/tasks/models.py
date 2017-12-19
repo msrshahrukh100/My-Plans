@@ -4,20 +4,28 @@ from __future__ import unicode_literals
 from django.db import models
 from autoslug import AutoSlugField
 from django.contrib.auth.models import User
-
+from django.utils import timezone
 # Create your models here.
 
 class TaskManager(models.Manager):
 	def get_queryset(self):
-		return super(TaskManager, self).get_queryset().order_by('order')
+		return super(TaskManager, self).get_queryset().order_by('time')
 
 class Task(models.Model):
 	content = models.TextField()
 	slug = AutoSlugField(populate_from='content')
-	order = models.IntegerField()
+	time = models.DateTimeField()
 	color = models.CharField(max_length=255)
 
 	objects = TaskManager()
+
+	def get_task_status(self):
+		'''	
+			Returns True for active tasks else false
+		'''
+		if timezone.now() - self.time  <  timezone.timedelta(hours=4)  :
+			return True
+		return False
 
 	def __str__(self):
 		return self.slug

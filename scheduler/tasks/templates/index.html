@@ -44,7 +44,11 @@
             <p>
               <label style="color:black; font-weight: bold;">
                 <input data-url="{% url 'tasks:change_status' id=plan.id %}" class="task" data-id="{{ plan.id }}" type="checkbox" {% if plan.status %} checked {% endif %} />
-                <span>{{ plan.task.content }}</span>
+                <span>{{ plan.task.content }}  
+                 {% if plan.task.get_task_status %}
+                  <a class="btn-floating waves-effect waves-light green pulse" style="height: 15px; width: 15px;"></a>
+                  {% endif %}
+                </span>
               </label>
             </p>
             <br>

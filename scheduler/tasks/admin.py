@@ -6,8 +6,8 @@ from django.contrib import admin
 # Register your models here.
 
 class TaskAdmin(admin.ModelAdmin):
-	list_display = ['content', 'slug', 'order', 'color']
-	list_editable = ["order"]
+	list_display = ['content', 'slug', 'time', 'color']
+	list_editable = ["time"]
 
 class ScheduleManager(admin.ModelAdmin):
 	list_display = ['user' ,'date', 'task', 'status']
