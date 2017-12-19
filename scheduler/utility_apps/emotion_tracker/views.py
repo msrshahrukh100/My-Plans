@@ -17,6 +17,10 @@ def get_all_emotions(request):
 
 def emotion(request):
 	context = {"emotion_journals": EmotionJournal.objects.all()[:5] }
+	if request.method == 'POST':
+		emotiontags = request.POST.get('emotiontags')
+		tags = [tag.strip() for tag in emotiontags.split(',')]
+		context['emotion_journals'] = EmotionJournal.objects.filter(emotions_before__name__in=tags) 
 	return render(request, "emotion.html", context)
 
 def add_emotion(request):

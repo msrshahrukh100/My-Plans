@@ -14,7 +14,7 @@ class TaskManager(models.Manager):
 class Task(models.Model):
 	content = models.TextField()
 	slug = AutoSlugField(populate_from='content')
-	time = models.DateTimeField()
+	time = models.DateTimeField(auto_now=True)
 	color = models.CharField(max_length=255)
 
 	objects = TaskManager()

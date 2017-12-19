@@ -7,7 +7,6 @@ from django.contrib import admin
 
 class TaskAdmin(admin.ModelAdmin):
 	list_display = ['content', 'slug', 'time', 'color']
-	list_editable = ["time"]
 
 class ScheduleManager(admin.ModelAdmin):
 	list_display = ['user' ,'date', 'task', 'status']

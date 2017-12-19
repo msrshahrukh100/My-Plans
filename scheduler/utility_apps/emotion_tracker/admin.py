@@ -6,5 +6,10 @@ from .models import EmotionJournal, Emotions
 
 # Register your models here.
 
+class EmotionsAdmin(admin.ModelAdmin):
+	list_display = ['name' ,'emoticon']
+	list_editable = ['emoticon']
+
+
 admin.site.register(EmotionJournal)
-admin.site.register(Emotions)
+admin.site.register(Emotions, EmotionsAdmin)

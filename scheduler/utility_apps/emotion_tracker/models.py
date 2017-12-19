@@ -34,8 +34,8 @@ class TaggedEmotionsAfter(GenericTaggedItemBase):
 class EmotionJournal(models.Model):
 
 	situation = models.TextField()
-	emotions_before = TaggableManager(through=TaggedEmotionsBefore, verbose_name="Emotions Before", help_text="")
-	emotions_after = TaggableManager(through=TaggedEmotionsAfter, related_name="emotionsafter", verbose_name="Emotions After", help_text="")
+	emotions_before = TaggableManager(blank=True, through=TaggedEmotionsBefore, verbose_name="Emotions Before", help_text="")
+	emotions_after = TaggableManager(blank=True,  through=TaggedEmotionsAfter, related_name="emotionsafter", verbose_name="Emotions After", help_text="")
 
 	def __str__(self):
 		return str(self.id)

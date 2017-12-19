@@ -11,6 +11,19 @@
 
 <div class="row">
 	<div class="col s12 m10 l10 offset-l1 offset-m1">
+		<form method="POST" class="center">{% csrf_token %}
+			<div class="row">
+				<div class="chips chips-autocomplete col s4 offset-s3">
+					<input placeholder="You Emotions" id="emotiontags" type="text" name="emotiontags">
+				</div>
+				<div class="col s3">
+					 <button class="btn waves-effect waves-light" type="submit" name="action">
+					 	Show
+					    <i class="material-icons right">send</i>
+					  </button>
+				</div>
+			</div>
+		</form>
 		{% for ej in emotion_journals %}
 		 <div class="row">
 		    <div class="col l8 s12 m10 offset-l2 offset-m1">
@@ -47,4 +60,34 @@
 
 
 {% endblock %}
+
+{% block extra_scripts %}
+<script type="text/javascript">
+	var jsonData = $.ajax({
+		url: '/emotion-tracker/get-all-emotions',
+		dataType: "json",
+		async: false
+	}).responseText;
+
+	jsonData = JSON.parse(jsonData)
+
+	var autocompleteData = {} ;
+
+	$.each(jsonData['emotions'], function(key, value){
+		autocompleteData[value] = null;
+	});
+
+
+  $('.chips-autocomplete').chips({
+    	
+    autocompleteOptions: {
+
+
+      data: autocompleteData,
+      limit: Infinity,
+      minLength: 1
+    }
+  });
+</script>
+  {% endblock %}
 
