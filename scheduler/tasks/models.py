@@ -14,7 +14,7 @@ class TaskManager(models.Manager):
 class Task(models.Model):
 	content = models.TextField()
 	slug = AutoSlugField(populate_from='content')
-	time = models.DateTimeField(auto_now=True)
+	time = models.DateTimeField()
 	color = models.CharField(max_length=255)
 
 	objects = TaskManager()
@@ -23,7 +23,14 @@ class Task(models.Model):
 		'''	
 			Returns True for active tasks else false
 		'''
-		if timezone.now() - self.time  <  timezone.timedelta(hours=4)  :
+		if timezone.now() > self.time :
+			time_difference = (timezone.now() - self.time).seconds
+		else :
+			time_difference = (self.time - timezone.now()).seconds
+
+		in_a_difference_of = timezone.timedelta(hours=4).seconds
+
+		if time_difference < in_a_difference_of :
 			return True
 		return False
 
