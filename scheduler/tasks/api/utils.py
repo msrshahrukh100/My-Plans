@@ -7,7 +7,10 @@ def get_total_percent_data(task, user, dayspast):
 		Schedule is for a day. A schedule is made up of various tasks.
 	"""
 	if dayspast :
-		schedules = task.schedule.filter(user=user, date=datetime.now()-timedelta(days=dayspast))
+		if dayspast == 1 :
+			schedules = task.schedule.filter(user=user, date=datetime.now()-timedelta(days=dayspast))
+		else:
+			schedules = task.schedule.filter(user=user, date__gte=datetime.now()-timedelta(days=dayspast))
 	else :
 		schedules = task.schedule.filter(user=user)
 	success = schedules.filter(status=True).count()
