@@ -138,3 +138,8 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR),"static_cdn")
 
+
+
+# for the django-taggit
+TAGGIT_CASE_INSENSITIVE = True
+TAGGIT_FORCE_LOWERCASE = True

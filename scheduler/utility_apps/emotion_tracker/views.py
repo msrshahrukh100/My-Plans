@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import EmotionJournalForm
 from .models import EmotionJournal
 from taggit.models import Tag
@@ -16,11 +16,14 @@ def get_all_emotions(request):
 	return JsonResponse({ "emotions": emotions})
 
 def emotion(request):
-	context = {"emotion_journals": EmotionJournal.objects.all()[:5] }
+	context = {"emotion_journals": EmotionJournal.objects.all().order_by('-id')[:5] }
 	if request.method == 'POST':
 		emotiontags = request.POST.get('emotiontags')
-		tags = [tag.strip() for tag in emotiontags.split(',')]
-		context['emotion_journals'] = EmotionJournal.objects.filter(emotions_before__name__in=tags) 
+		if emotiontags :
+			tags = [tag.strip() for tag in emotiontags.split(',')]
+			context['emotion_journals'] = EmotionJournal.objects.filter(emotions_before__name__in=tags)
+		else :
+			context['emotion_journals'] = EmotionJournal.objects.all()
 	return render(request, "emotion.html", context)
 
 def add_emotion(request):
@@ -29,4 +32,5 @@ def add_emotion(request):
 	if request.method == 'POST':
 		if form.is_valid():
 			form.save()
+		return redirect("emotionapp:emotion")
 	return render(request, "addemotion.html", context)
