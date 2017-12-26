@@ -21,7 +21,7 @@ def emotion(request):
 		emotiontags = request.POST.get('emotiontags')
 		if emotiontags :
 			tags = [tag.strip() for tag in emotiontags.split(',')]
-			context['emotion_journals'] = EmotionJournal.objects.filter(emotions_before__name__in=tags)
+			context['emotion_journals'] = EmotionJournal.objects.filter(emotions_before__name__in=tags).order_by('created_at')
 		else :
 			context['emotion_journals'] = EmotionJournal.objects.all()
 	return render(request, "emotion.html", context)
