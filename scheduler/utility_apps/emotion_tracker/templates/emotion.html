@@ -29,9 +29,12 @@
 		    <div class="col l8 s12 m10 offset-l2 offset-m1">
 		      <div class="card">
 		        <div class="card-content">
+		        	<span class="new badge" data-badge-caption="{{ ej.created_at|date:'P l d M, Y' }}"></span>
+		        	<br>
+		        	<br>
 		        	<div class="center">
 		        		{% for emotion_before in ej.emotions_before.all %}
-			        	 <div class="chip">
+			        	 <div class="chip {{ emotion_before.emotion.first.color }}">
 						    {{ emotion_before.emotion.first.emoticon }} &nbsp
 						    {{ emotion_before.name }} 
 						  </div>
@@ -44,7 +47,7 @@
 			      <div class="section"></div>
 			      <div class="center">
 		        		{% for emotion_after in ej.emotions_after.all %}
-			        	 <div class="chip">
+			        	 <div class="chip {{ emotion_after.emotion.first.color }}">
 						    {{ emotion_after.emotion.first.emoticon }} &nbsp
 						    {{ emotion_after.name }} 
 						  </div>

@@ -7,8 +7,8 @@ from .models import EmotionJournal, Emotions
 # Register your models here.
 
 class EmotionsAdmin(admin.ModelAdmin):
-	list_display = ['name' ,'emoticon']
-	list_editable = ['emoticon']
+	list_display = ['name' ,'emoticon', 'color']
+	list_editable = ['emoticon', 'color']
 
 
 admin.site.register(EmotionJournal)
