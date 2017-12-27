@@ -25,6 +25,7 @@ urlpatterns = [
 
     # from the utility apps
     url(r'emotion-tracker/', include('utility_apps.emotion_tracker.urls', namespace="emotionapp")),
+    url(r'gym-tracker/', include('utility_apps.gym_tracker.urls', namespace="gymapp")),
 ]
 
 

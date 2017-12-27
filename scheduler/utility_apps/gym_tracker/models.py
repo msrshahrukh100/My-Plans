@@ -6,7 +6,10 @@ from django.core.files import File
 from django.db.models.signals import post_save
 import urllib
 from django.utils import timezone
+from django.contrib.auth.models import User
 # Create your models here.
+
+
 class Program(models.Model):
 	program_name = models.CharField(max_length=255)
 	description = models.TextField(blank=True, null=True)
@@ -17,7 +20,15 @@ class Program(models.Model):
 
 	def get_all_excercises_for_the_day(self):
 		day = int(timezone.now().day) / self.number_of_days
-		return self.getexcercises.all().filter(weekday=day)
+		return self.getexcercises.all().filter(weekday=day).first().excercises.all()
+
+
+class UserProgramMap(models.Model):
+	user = models.ForeignKey(User)
+	program = models.ForeignKey(Program)
+
+	def __str__(self):
+		return str(self.id)
 
 
 def upload_location(instance, filename):

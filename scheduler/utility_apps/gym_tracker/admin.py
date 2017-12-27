@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from .models import Exercise, Program, ProgramExcerciseMap
+from .models import Exercise, Program, ProgramExcerciseMap, UserProgramMap
 
 # Register your models here.
 
@@ -13,6 +13,7 @@ class ExerciseAdmin(admin.ModelAdmin):
 admin.site.register(Exercise, ExerciseAdmin)
 admin.site.register(Program)
 admin.site.register(ProgramExcerciseMap)
+admin.site.register(UserProgramMap)
 
 
 
