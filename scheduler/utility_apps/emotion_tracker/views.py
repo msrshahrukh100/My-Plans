@@ -6,7 +6,7 @@ from .forms import EmotionJournalForm
 from .models import EmotionJournal
 from taggit.models import Tag
 from django.http import JsonResponse
-
+from django.db.models import Q
 
 # Create your views here.
 
@@ -21,7 +21,7 @@ def emotion(request):
 		emotiontags = request.POST.get('emotiontags')
 		if emotiontags :
 			tags = [tag.strip() for tag in emotiontags.split(',')]
-			context['emotion_journals'] = EmotionJournal.objects.filter(emotions_before__name__in=tags).order_by('-created_at')
+			context['emotion_journals'] = EmotionJournal.objects.filter(Q(emotions_before__name__in=tags) | Q(emotions_after__name__in=tags)).order_by('-created_at')
 		else :
 			context['emotion_journals'] = EmotionJournal.objects.all().order_by('-created_at')
 	return render(request, "emotion.html", context)
