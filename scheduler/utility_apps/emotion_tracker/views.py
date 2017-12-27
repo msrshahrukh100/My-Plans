@@ -31,6 +31,8 @@ def add_emotion(request):
 	context = {"form":form}
 	if request.method == 'POST':
 		if form.is_valid():
-			form.save()
+			obj = form.save(commit=False)
+			obj.save()
+			form.save_m2m()
 		return redirect("emotionapp:emotion")
 	return render(request, "addemotion.html", context)
