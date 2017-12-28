@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+	# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import os
 from django.db import models
@@ -19,13 +19,17 @@ class Program(models.Model):
 		return self.program_name
 
 	def get_all_excercises_for_the_day(self):
-		day = int(timezone.now().day) / self.number_of_days
-		return self.getexcercises.all().filter(weekday=day).first().excercises.all()
+		day = int(timezone.now().day) % self.number_of_days
+		day_exercises = self.getexcercises.all().filter(weekday=day).first()
+		if day_exercises:
+			return day_exercises.excercises.all().order_by('id')
+		else :
+			return None
 
 
 class UserProgramMap(models.Model):
 	user = models.ForeignKey(User)
-	program = models.ForeignKey(Program)
+	program = models.ForeignKey(Program, default=1)
 
 	def __str__(self):
 		return str(self.id)
