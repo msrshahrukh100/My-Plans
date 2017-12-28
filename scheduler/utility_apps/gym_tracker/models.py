@@ -67,7 +67,6 @@ class Exercise(models.Model):
 
 
 def save_exercise(sender, instance, **kwargs):
-	pass # remove this pass when shifting away from pythonanywhere.com
 	if instance.image_url and not instance.image :
 		try:
 			result = urllib.urlretrieve(instance.image_url)
@@ -78,7 +77,8 @@ def save_exercise(sender, instance, **kwargs):
 		except:
 			pass
 
-post_save.connect(save_exercise, sender=Exercise)
+# uncomment this line when shifting away from pythonanywhere.com
+# post_save.connect(save_exercise, sender=Exercise)
 
 
 class ProgramExcerciseMap(models.Model):
