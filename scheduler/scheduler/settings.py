@@ -145,7 +145,3 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")
 
 
-
-# for the django-taggit
-TAGGIT_CASE_INSENSITIVE = True
-TAGGIT_FORCE_LOWERCASE = True
