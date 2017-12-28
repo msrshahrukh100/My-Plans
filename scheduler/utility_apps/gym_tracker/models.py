@@ -29,7 +29,7 @@ class Program(models.Model):
 
 class UserProgramMap(models.Model):
 	user = models.ForeignKey(User)
-	program = models.ForeignKey(Program, default=1)
+	program = models.ForeignKey(Program)
 
 	def __str__(self):
 		return str(self.id)
@@ -59,14 +59,23 @@ class Exercise(models.Model):
 	def __str__(self):
 		return self.exercise_name
 
+	def get_image_url(self):
+		if self.image:
+			return self.image.url
+		return self.image_url
+
+
 
 def save_exercise(sender, instance, **kwargs):
 	if instance.image_url and not instance.image :
-		result = urllib.urlretrieve(instance.image_url)
-		instance.image.save(
-		        os.path.basename(instance.image_url),
-		        File(open(result[0]))
-		        )
+		try:
+			result = urllib.urlretrieve(instance.image_url)
+			instance.image.save(
+			        os.path.basename(instance.image_url),
+			        File(open(result[0]))
+			        )
+		except:
+			pass
 
 post_save.connect(save_exercise, sender=Exercise)
 
