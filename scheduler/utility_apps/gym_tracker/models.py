@@ -22,7 +22,7 @@ class Program(models.Model):
 		day = int(timezone.now().day) % self.number_of_days
 		day_exercises = self.getexcercises.all().filter(weekday=day).first()
 		if day_exercises:
-			return day_exercises.excercises.all().order_by('id')
+			return day_exercises.excercises.all().order_by('order_of_performing')
 		else :
 			return None
 
@@ -53,7 +53,7 @@ class Exercise(models.Model):
 		height_field="height_field")
 	height_field = models.IntegerField(default=0)
 	width_field = models.IntegerField(default=0)
-
+	order_of_performing = models.IntegerField(default=1)
 	description = models.TextField()
 
 	def __str__(self):
