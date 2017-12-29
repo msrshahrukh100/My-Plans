@@ -8,7 +8,9 @@ from .models import Exercise, Program, ProgramExcerciseMap, UserProgramMap
 
 class ExerciseAdmin(admin.ModelAdmin):
 	model = Exercise
-	list_display = ['exercise_name', 'muscle_group', 'sets', 'reps', 'max_weight']
+	list_display = ['exercise_name', 'muscle_group', 'sets', 'reps', 'max_weight', 'order_of_performing']
+	list_editable = ['order_of_performing']
+	list_filter = ['muscle_group']
 
 admin.site.register(Exercise, ExerciseAdmin)
 admin.site.register(Program)

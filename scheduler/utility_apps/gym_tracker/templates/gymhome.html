@@ -18,7 +18,7 @@
       </div>
       <div class="card-stacked">
         <div class="card-content">
-        	{{ instance.description }}
+        	{{ instance.description|linebreaks }}
         	<div class="divider"></div>
           <form method="POST">
 				{% csrf_token %}
