@@ -44,7 +44,7 @@ class Exercise(models.Model):
 	muscle_group = models.CharField(max_length=300)
 	sets = models.IntegerField(default=1)
 	reps = models.IntegerField(default=1)
-	max_weight = models.IntegerField(default=1)
+	max_weight = models.FloatField(default=1)
 	image_url = models.URLField(null=True, blank=True)
 	image = models.ImageField(upload_to=upload_location, 	
 		null=True, 
