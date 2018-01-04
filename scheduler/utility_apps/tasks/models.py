@@ -5,13 +5,43 @@ from django.db import models
 from autoslug import AutoSlugField
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.db.models.signals import post_save
+
 # Create your models here.
+
+
+
+class TimeBoundTasks(models.Model):
+	user = models.ForeignKey(User, related_name="timeboundtasks")
+	name = models.CharField(max_length=400)
+	description = models.TextField()
+	unit = models.CharField(max_length=255, help_text="The unit that divides your task into parts. eg in a book of 18 chapters, chapter is the unit")
+	total_units = models.FloatField()
+	units_completed = models.FloatField()
+	percent_completed = models.FloatField()
+	deadline = models.DateTimeField(blank=True, null=True)
+	completed = models.BooleanField(default=False)
+	created_at = models.DateTimeField(auto_now=True)
+	updated_at = models.DateTimeField(auto_now_add=True)
+
+	def __str__(self):
+		return str(self.id)
+
+def add_percent_completed(sender, instance, **kwargs):
+	instance.percent_completed = (instance.units_completed / instance.total_units) * 100
+	instance.save()
+
+post_save.connect(add_percent_completed, sender=TimeBoundTasks)
 
 class TaskManager(models.Manager):
 	def get_queryset(self):
 		return super(TaskManager, self).get_queryset().order_by('time')
 
+def get_user():
+	return User.objects.first()
+
 class Task(models.Model):
+	user = models.ForeignKey(User, default=get_user)
 	content = models.TextField()
 	slug = AutoSlugField(populate_from='content')
 	time = models.DateTimeField()
@@ -37,9 +67,9 @@ class Task(models.Model):
 	def __str__(self):
 		return self.slug
 
-class ScheduleManager(models.Manager):
-	def get_queryset(self):
-		return super(ScheduleManager, self).get_queryset().order_by('date').order_by(self.task.order)
+# class ScheduleManager(models.Manager):
+# 	def get_queryset(self):
+# 		return super(ScheduleManager, self).get_queryset().order_by('date').order_by(self.task.order)
 
 class Schedule(models.Model):
 	user = models.ForeignKey(User, related_name="schedules")

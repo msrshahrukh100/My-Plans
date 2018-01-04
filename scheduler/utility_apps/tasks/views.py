@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.decorators import login_required
-from .models import Schedule, Task
+from .models import Schedule, Task, TimeBoundTasks
 from django.utils.timezone import datetime
 
 from rest_framework.views import APIView
@@ -29,6 +29,9 @@ def home(request):
 	}
 	return render(request, "index.html", context)
 
+def time_bound_tasks(request):
+	context = {"tbts": TimeBoundTasks.objects.all()}
+	return render(request, "timebound.html", context)
 
 def history(request):
 	plans = Schedule.objects.all()
