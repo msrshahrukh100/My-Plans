@@ -29,9 +29,31 @@ def home(request):
 	}
 	return render(request, "index.html", context)
 
+@login_required()
 def time_bound_tasks(request):
-	context = {"tbts": TimeBoundTasks.objects.all()}
+	user = request.user
+	context = {"tbts": TimeBoundTasks.objects.filter(user=user)}
 	return render(request, "timebound.html", context)
+
+def change_tbt_status(request, id, action):
+	user = request.user
+	tbt = get_object_or_404(TimeBoundTasks, id=id, user=user)
+	if action == "increase" :
+		tbt.units_completed = tbt.units_completed + 1
+		tbt.save()
+		return JsonResponse({"msg": "Progress Made",
+			"id": id, 
+			"units_completed": tbt.units_completed, 
+			"percent_completed": tbt.percent_completed})
+	elif action == "decrease" :
+		tbt.units_completed = tbt.units_completed - 1
+		tbt.save()		
+		return JsonResponse({"msg": "Decreased",
+			"id": id,
+			"units_completed": tbt.units_completed, 
+			"percent_completed": tbt.percent_completed})
+	return JsonResponse({"msg":"Error"})
+
 
 def history(request):
 	plans = Schedule.objects.all()

@@ -1,5 +1,5 @@
 {% extends "index.html" %}
-
+{% load tasks_extras %}
 {% block title %} Tbts | {{ request.user }} {% endblock %}
 
 {% block content %}
@@ -11,7 +11,36 @@
 
 <div class="row">
 	<div class="col s12 m10 l10 offset-l1 offset-m1">
-		{{ tbts }}
+		{% for tbt in tbts %}
+		<div class="row">
+			<div class="col s12 m10 l10 offset-l1 offset-m1">
+			  <div class="card">
+			    <div class="card-content">
+		    	  <span id="badge-{{ tbt.id }}" class="new badge {{ tbt.percent_completed|getcolor }}" data-badge-caption="% completed">
+		    	  {{ tbt.percent_completed|floatformat:2 }}
+		    	  </span>
+			    	<h4>{{ tbt.name }}</h4>
+			    	<p>
+			    		{{ tbt.description }}
+			    	</p>
+			    	{% if tbt.deadline %}
+			    	<p class="red-text right">
+			    		Deadline - {{ tbt.deadline|date:"l d M, Y" }}
+			    	</p>
+			    	{% endif %}
+			    </div>
+			    <div class="card-action">
+			    	<strong><span id="units_completed-{{ tbt.id }}">{{ tbt.units_completed }}</span> of {{ tbt.total_units }} {{ tbt.unit }} completed</strong>
+			    	  <div class="progress">
+					      <div id="progress-{{ tbt.id }}" class="determinate" style="width:{{ tbt.percent_completed|floatformat:2 }}%"></div>
+					  </div>
+			    	<a class="tbt-change-status" data-url="{{ tbt.get_increase_url }}">Made Progress</a>
+			    	<a class="tbt-change-status right" data-url="{{ tbt.get_decrease_url }}"><i class="material-icons">remove</i></a>
+			    </div>
+			  </div>
+			</div>
+		</div>
+		{% endfor %}
 	</div>
 </div>
 

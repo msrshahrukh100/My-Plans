@@ -1,5 +1,12 @@
 from django.conf.urls import url
-from .views import home, change_status, history, AnalysisData, analysis, get_todays_score, time_bound_tasks
+from .views import (home, 
+	change_status, 
+	history, 
+	AnalysisData, 
+	analysis, 
+	get_todays_score, 
+	time_bound_tasks,
+	change_tbt_status)
 
 
 urlpatterns = [
@@ -9,7 +16,7 @@ urlpatterns = [
     url(r'^time-bound-tasks/$', time_bound_tasks, name="time_bound_tasks"),
     url(r'^your-analysis/$', analysis, name="analysis" ),
     url(r'^get-todays-score/$', get_todays_score, name="get_todays_score" ),
-
+   	url(r'^change-tbt-status/(?P<id>[0-9]+)/(?P<action>[\w\-]+)/$', change_tbt_status, name="change_tbt_status" ),
     url(r'^get-analysis-data/$', AnalysisData.as_view(), name="get_analysis_data"),
 
 ]

@@ -5,7 +5,8 @@ from django.db import models
 from autoslug import AutoSlugField
 from django.contrib.auth.models import User
 from django.utils import timezone
-from django.db.models.signals import post_save
+from django.db.models.signals import pre_save
+from django.core.urlresolvers import reverse
 
 # Create your models here.
 
@@ -18,7 +19,7 @@ class TimeBoundTasks(models.Model):
 	unit = models.CharField(max_length=255, help_text="The unit that divides your task into parts. eg in a book of 18 chapters, chapter is the unit")
 	total_units = models.FloatField()
 	units_completed = models.FloatField()
-	percent_completed = models.FloatField()
+	percent_completed = models.FloatField(null=True, blank=True)
 	deadline = models.DateTimeField(blank=True, null=True)
 	completed = models.BooleanField(default=False)
 	created_at = models.DateTimeField(auto_now=True)
@@ -27,11 +28,16 @@ class TimeBoundTasks(models.Model):
 	def __str__(self):
 		return str(self.id)
 
+	def get_increase_url(self):
+		return reverse('tasks:change_tbt_status', kwargs={"id":self.id, "action":"increase"})
+
+	def get_decrease_url(self):
+		return reverse('tasks:change_tbt_status', kwargs={"id":self.id, "action":"decrease"})
+
 def add_percent_completed(sender, instance, **kwargs):
 	instance.percent_completed = (instance.units_completed / instance.total_units) * 100
-	instance.save()
 
-post_save.connect(add_percent_completed, sender=TimeBoundTasks)
+pre_save.connect(add_percent_completed, sender=TimeBoundTasks)
 
 class TaskManager(models.Manager):
 	def get_queryset(self):
