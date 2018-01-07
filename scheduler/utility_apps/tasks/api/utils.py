@@ -58,13 +58,21 @@ def get_color_from_score(score):
 	"""
 	if score < 50 :
 		return "red darken-4"
-	elif score >= 50 and score < 65 :
+	elif score >= 50 and score < 55 :
+		return "red darken-3"
+	elif score >= 55 and score < 60 :
+		return "red darken-2"
+	elif score >= 60 and score < 65 :
 		return "red darken-1"
 	elif score >= 65 and score < 70 :
 		return "red"
-	elif score >= 70 and score < 75:
+	elif score >= 70 and score < 73:
+		return "red lighten-1"
+	elif score >= 73 and score < 75:
 		return "red lighten-2"
-	elif score >=75 and score < 80 :
+	elif score >=75 and score < 77 :
+		return "green lighten-4"
+	elif score >=77 and score < 80 :
 		return "green lighten-3"
 	elif score >= 80 and score < 85:
 		return "green lighten-2"

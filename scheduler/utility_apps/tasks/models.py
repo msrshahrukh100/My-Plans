@@ -18,7 +18,7 @@ class TimeBoundTasks(models.Model):
 	description = models.TextField()
 	unit = models.CharField(max_length=255, help_text="The unit that divides your task into parts. eg in a book of 18 chapters, chapter is the unit")
 	total_units = models.FloatField()
-	units_completed = models.FloatField()
+	units_completed = models.FloatField(default=0)
 	percent_completed = models.FloatField(null=True, blank=True)
 	deadline = models.DateTimeField(blank=True, null=True)
 	completed = models.BooleanField(default=False)

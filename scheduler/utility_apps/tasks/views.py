@@ -10,7 +10,7 @@ from django.utils.timezone import datetime
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import authentication, permissions
-from api.utils import get_data_of_user, get_previous_ndays_data
+from api.utils import get_data_of_user, get_previous_ndays_data, get_color_from_score
 
 # Create your views here.
 @login_required(login_url='admin/')
@@ -39,19 +39,29 @@ def change_tbt_status(request, id, action):
 	user = request.user
 	tbt = get_object_or_404(TimeBoundTasks, id=id, user=user)
 	if action == "increase" :
-		tbt.units_completed = tbt.units_completed + 1
-		tbt.save()
-		return JsonResponse({"msg": "Progress Made",
-			"id": id, 
-			"units_completed": tbt.units_completed, 
-			"percent_completed": tbt.percent_completed})
+		if tbt.units_completed < tbt.total_units :
+			tbt.units_completed = tbt.units_completed + 1
+			tbt.save()
+			return JsonResponse({"msg": "Progress Made",
+				"id": id,
+				"units_completed": tbt.units_completed,
+				"percent_completed": float("{:.2f}".format(tbt.percent_completed)),
+				"color": get_color_from_score(tbt.percent_completed)
+				})
+		else:
+			return JsonResponse({"msg": "You completed this!!"})
 	elif action == "decrease" :
-		tbt.units_completed = tbt.units_completed - 1
-		tbt.save()		
-		return JsonResponse({"msg": "Decreased",
-			"id": id,
-			"units_completed": tbt.units_completed, 
-			"percent_completed": tbt.percent_completed})
+		if tbt.units_completed > 0 :
+			tbt.units_completed = tbt.units_completed - 1
+			tbt.save()
+			return JsonResponse({"msg": "Decreased",
+				"id": id,
+				"units_completed": tbt.units_completed,
+				"percent_completed": float("{:.2f}".format(tbt.percent_completed)),
+				"color": get_color_from_score(tbt.percent_completed)
+				})
+		else :
+			return JsonResponse({"msg": "Cannot decrease"})
 	return JsonResponse({"msg":"Error"})
 
 
