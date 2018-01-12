@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.db.models.signals import pre_save
 from django.core.urlresolvers import reverse
-
+from django.utils import timezone
 # Create your models here.
 
 
@@ -28,6 +28,9 @@ class TimeBoundTasks(models.Model):
 	def __str__(self):
 		return str(self.id)
 
+	def get_subtasks(self):
+		return self.getsubtasks.filter(done=False).order_by('due_date')
+
 	def get_increase_url(self):
 		return reverse('tasks:change_tbt_status', kwargs={"id":self.id, "action":"increase"})
 
@@ -38,6 +41,24 @@ def add_percent_completed(sender, instance, **kwargs):
 	instance.percent_completed = (instance.units_completed / instance.total_units) * 100
 
 pre_save.connect(add_percent_completed, sender=TimeBoundTasks)
+
+
+class TimeBoundTasksSubtask(models.Model):
+	user = models.ForeignKey(User, related_name='tbtsubtasks')
+	tbt = models.ForeignKey(TimeBoundTasks, related_name="getsubtasks")
+	due_date = models.DateTimeField(null=True, blank=True)
+	subtask = models.TextField()
+	done = models.BooleanField(default=False)
+
+	def __str__(self):
+		return self.subtask
+
+	def is_late(self):
+		return self.due_date < timezone.now()
+
+	def get_done_url(self):
+		return reverse('tasks:change_tbt_subtask_done', kwargs={'id' : self.id})
+
 
 class TaskManager(models.Manager):
 	def get_queryset(self):

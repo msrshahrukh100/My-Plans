@@ -23,6 +23,28 @@
 			    	<p>
 			    		{{ tbt.description }}
 			    	</p>
+			    	<p>
+						<ul class="collection">
+				    		{% for subtask in tbt.get_subtasks %}
+							<li class="collection-item">
+								<div>
+									{{ subtask.subtask }}
+									<a href="{{ subtask.get_done_url }}" class="secondary-content waves-effect waves-light">Done</a>
+									<a class="secondary-content
+									{% if subtask.is_late %}
+										red-text
+									{% else %}
+										green-text
+									{% endif %}
+									">
+										{{ subtask.due_date }}
+									</a>
+
+								</div>
+							</li>
+							{% endfor %}
+						</ul>
+			    	</p>
 			    	{% if tbt.deadline %}
 			    	<p class="red-text right">
 			    		Deadline - {{ tbt.deadline|date:"l d M, Y" }}

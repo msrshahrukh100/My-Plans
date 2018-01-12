@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.decorators import login_required
-from .models import Schedule, Task, TimeBoundTasks
+from .models import Schedule, Task, TimeBoundTasks, TimeBoundTasksSubtask
 from django.utils.timezone import datetime
 
 from rest_framework.views import APIView
@@ -34,6 +34,15 @@ def time_bound_tasks(request):
 	user = request.user
 	context = {"tbts": TimeBoundTasks.objects.filter(user=user)}
 	return render(request, "timebound.html", context)
+
+def change_tbt_subtask_done(request, id):
+	subtask = get_object_or_404(TimeBoundTasksSubtask, id=id)
+	subtask.done = True
+	subtask.save()
+
+	return redirect('tasks:time_bound_tasks')
+
+
 
 def change_tbt_status(request, id, action):
 	user = request.user

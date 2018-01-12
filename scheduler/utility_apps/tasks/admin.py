@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from .models import Task, Schedule, TimeBoundTasks
+from .models import (Task, Schedule, TimeBoundTasks, TimeBoundTasksSubtask)
 from django.contrib import admin
 
 # Register your models here.
@@ -17,7 +17,11 @@ class TimeBoundTasksAdmin(admin.ModelAdmin):
 	list_display = ['user', 'name', 'unit', 'total_units', 'units_completed', 'deadline', 'completed']
 	list_filter = ['completed']
 
+class TimeBoundTasksSubtaskAdmin(admin.ModelAdmin):
+	list_display = ['user', 'tbt', 'due_date', 'subtask']
+
 
 admin.site.register(Task, TaskAdmin)
 admin.site.register(Schedule, ScheduleManager)
 admin.site.register(TimeBoundTasks, TimeBoundTasksAdmin)
+admin.site.register(TimeBoundTasksSubtask, TimeBoundTasksSubtaskAdmin)
