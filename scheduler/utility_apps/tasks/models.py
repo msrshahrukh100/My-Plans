@@ -26,7 +26,7 @@ class TimeBoundTasks(models.Model):
 	updated_at = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
-		return str(self.id)
+		return self.name
 
 	def get_subtasks(self):
 		return self.getsubtasks.filter(done=False).order_by('due_date')
