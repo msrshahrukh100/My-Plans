@@ -39,7 +39,7 @@ def add_emotion(request):
 
 def read_frc_scripts(request):
 	context = {
-	'frc_scripts': FRCScript.objects.all().order_by('created_at')
+	'frc_scripts': FRCScript.objects.all().order_by('-created_at')
 	}
 
 	return render(request, 'read_frc.html', context)
