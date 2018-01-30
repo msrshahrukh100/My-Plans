@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, redirect
 from .forms import EmotionJournalForm
-from .models import EmotionJournal
+from .models import EmotionJournal, FRCScript
 from taggit.models import Tag
 from django.http import JsonResponse
 from django.db.models import Q
@@ -36,3 +36,10 @@ def add_emotion(request):
 			form.save_m2m()
 		return redirect("emotionapp:emotion")
 	return render(request, "addemotion.html", context)
+
+def read_frc_scripts(request):
+	context = {
+	'frc_scripts': FRCScript.objects.all().order_by('created_at')
+	}
+
+	return render(request, 'read_frc.html', context)

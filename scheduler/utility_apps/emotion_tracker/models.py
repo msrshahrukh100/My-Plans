@@ -44,6 +44,18 @@ class EmotionJournal(models.Model):
 		return str(self.id)
 
 
+class FRCScript(models.Model):
+	face_it_statement = models.TextField()
+	replace_it_statement = models.TextField()
+	connect_statement = models.TextField()
+	created_at = models.DateTimeField(auto_now=True, auto_now_add=False)
+	update_at = models.DateTimeField(auto_now=False, auto_now_add=True)
+
+
+	def __str__(self):
+		return str(self.id)
+
+
 # signals are there below this line
 
 def save_emotion(sender, instance, **kwargs):

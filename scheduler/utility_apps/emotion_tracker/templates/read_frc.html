@@ -1,0 +1,44 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block title %} Read All FRC scripts | {{ request.user }} {% endblock %}
+
+{% block content %}
+
+{% for frc_script in frc_scripts %}
+ <div class="row container">
+    <div class="col s12 m10 l10 offset-l1 offset-m1">
+		<div class="card">
+			<span class="new badge" data-badge-caption="{{ frc_script.created_at|date:'P l d M, Y' }}"></span>
+			<div class="card-content">
+				 <ul class="collection">
+				    <li class="collection-item avatar">
+				      <i class="material-icons circle">folder</i>
+				      <span class="title"><strong>Face It Statement</strong></span>
+				      <p>
+				      	{{ frc_script.face_it_statement }}
+				      </p>
+				    </li>
+				    <li class="collection-item avatar">
+				      <i class="material-icons circle green">insert_chart</i>
+				      <span class="title"><strong>Replace It Statement</strong></span>
+				      <p>
+				      	{{ frc_script.replace_it_statement }}
+				      </p>
+				    </li>
+				    <li class="collection-item avatar">
+				      <i class="material-icons circle red">play_arrow</i>
+				      <span class="title"><strong>Connect Statement</strong></span>
+				      <p>
+				      	{{ frc_script.connect_statement }}
+				      </p>
+				    </li>
+				  </ul>
+			</div>
+		</div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}
+

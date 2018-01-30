@@ -5,37 +5,111 @@
 
 {% block content %}
  <div class="row container">
-    <div class="col s6 m6 l6">
-      <div class="card">
-        <div class="card-image">
-          <img height="250" width="100" src="{% static 'images/task.jpeg' %}">
-          <span class="card-title">Card Title</span>
-        </div>
-        <div class="card-content">
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
-        </div>
-        <div class="card-action">
-          <a href="#">This is a link</a>
-        </div>
-      </div>
+    <div class="col s12 m6 l6">
+        <a href="{% url 'tasks:daily_tasks' %}">
+			<div class="card">
+				<div class="card-image">
+				  <img height="250" width="100" src="{% static 'images/dailytasks.jpeg' %}">
+				  <span class="card-title">Daily Tasks</span>
+				</div>
+				<div class="card-content">
+					<p>
+				  	I am a very simple card. I am good at containing small bits of information.
+				  I am convenient because I require little markup to use effectively.
+					</p>
+				</div>
+			</div>
+		</a>
     </div>
-    <div class="col s6 m6 l6">
-      <div class="card">
-        <div class="card-image">
-          <img height="250" width="100" src="{% static 'images/task.jpeg' %}">
-          <span class="card-title">Card Title</span>
-        </div>
-        <div class="card-content">
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
-        </div>
-        <div class="card-action">
-          <a href="#">This is a link</a>
-        </div>
-      </div>
+    <div class="col s12 m6 l6">
+        <a href="{% url 'tasks:analysis' %}">
+			<div class="card">
+				<div class="card-image">
+				  <img height="250" width="100" src="{% static 'images/analysis.jpeg' %}">
+				  <span class="card-title">Analyze</span>
+				</div>
+				<div class="card-content">
+					<p>
+				  	I am a very simple card. I am good at containing small bits of information.
+				  I am convenient because I require little markup to use effectively.
+					</p>
+				</div>
+			</div>
+		</a>
+    </div>
+  </div>
+
+ <div class="row container">
+    <div class="col s12 m6 l6">
+        <a href="{% url 'emotionapp:emotion' %}">
+			<div class="card">
+				<div class="card-image">
+				  <img height="250" width="100" src="{% static 'images/trackemotions.jpeg' %}">
+				  <span class="card-title">Track Your Emotions</span>
+				</div>
+				<div class="card-content">
+					<p>
+				  	I am a very simple card. I am good at containing small bits of information.
+				  I am convenient because I require little markup to use effectively.
+					</p>
+				</div>
+			</div>
+		</a>
+    </div>
+    <div class="col s12 m6 l6">
+        <a href="{% url 'emotionapp:add_emotion' %}">
+			<div class="card">
+				<div class="card-image">
+				  <img height="250" width="100" src="{% static 'images/journalemotions.jpeg' %}">
+				  <span class="card-title">Journal Your Emotion</span>
+				</div>
+				<div class="card-content">
+					<p>
+				  	I am a very simple card. I am good at containing small bits of information.
+				  I am convenient because I require little markup to use effectively.
+					</p>
+				</div>
+			</div>
+		</a>
+    </div>
+  </div>
+
+ <div class="row container">
+    <div class="col s12 m6 l6">
+        <a href="{% url 'gymapp:gymhome' %}">
+			<div class="card">
+				<div class="card-image">
+				  <img height="250" width="100" src="{% static 'images/gym.jpeg' %}">
+				  <span class="card-title">Hit the Gym</span>
+				</div>
+				<div class="card-content">
+					<p>
+				  	I am a very simple card. I am good at containing small bits of information.
+				  I am convenient because I require little markup to use effectively.
+					</p>
+				</div>
+			</div>
+		</a>
+    </div>
+    <div class="col s12 m6 l6">
+        <a href="{% url 'emotionapp:read_frc_scripts' %}">
+			<div class="card">
+				<div class="card-image">
+				  <img height="250" width="100" src="{% static 'images/frc.jpeg' %}">
+				  <span class="card-title">Practise FRC scripts</span>
+				</div>
+				<div class="card-content">
+					<p>
+				  	I am a very simple card. I am good at containing small bits of information.
+				  I am convenient because I require little markup to use effectively.
+					</p>
+				</div>
+			</div>
+		</a>
     </div>
 
   </div>
+
+
 {% endblock %}
 

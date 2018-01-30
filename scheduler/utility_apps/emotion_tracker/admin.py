@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from .models import EmotionJournal, Emotions
+from .models import EmotionJournal, Emotions, FRCScript
 
 # Register your models here.
 
@@ -13,3 +13,4 @@ class EmotionsAdmin(admin.ModelAdmin):
 
 admin.site.register(EmotionJournal)
 admin.site.register(Emotions, EmotionsAdmin)
+admin.site.register(FRCScript)
