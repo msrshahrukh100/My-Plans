@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import (home, 
+from .views import (daily_tasks, 
 	change_status, 
 	history, 
 	AnalysisData, 
@@ -11,7 +11,7 @@ from .views import (home,
 
 
 urlpatterns = [
-    url(r'^$', home, name="home" ),
+    url(r'^daily-tasks/$', daily_tasks, name="daily_tasks" ),
     url(r'^change-status/(?P<id>[0-9]+)$', change_status, name="change_status" ),
     url(r'^history/$', history, name="history"),
     url(r'^time-bound-tasks/$', time_bound_tasks, name="time_bound_tasks"),

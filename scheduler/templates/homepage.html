@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block title %} Welcome to Homepage | {{ request.user }} {% endblock %}
+
+{% block content %}
+ <div class="row container">
+    <div class="col s6 m6 l6">
+      <div class="card">
+        <div class="card-image">
+          <img height="250" width="100" src="{% static 'images/task.jpeg' %}">
+          <span class="card-title">Card Title</span>
+        </div>
+        <div class="card-content">
+          <p>I am a very simple card. I am good at containing small bits of information.
+          I am convenient because I require little markup to use effectively.</p>
+        </div>
+        <div class="card-action">
+          <a href="#">This is a link</a>
+        </div>
+      </div>
+    </div>
+    <div class="col s6 m6 l6">
+      <div class="card">
+        <div class="card-image">
+          <img height="250" width="100" src="{% static 'images/task.jpeg' %}">
+          <span class="card-title">Card Title</span>
+        </div>
+        <div class="card-content">
+          <p>I am a very simple card. I am good at containing small bits of information.
+          I am convenient because I require little markup to use effectively.</p>
+        </div>
+        <div class="card-action">
+          <a href="#">This is a link</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+{% endblock %}
+

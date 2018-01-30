@@ -14,7 +14,7 @@ from api.utils import get_data_of_user, get_previous_ndays_data, get_color_from_
 
 # Create your views here.
 @login_required(login_url='admin/')
-def home(request):
+def daily_tasks(request):
 
 	plans = Schedule.objects.filter(user=request.user, date=datetime.today())
 	if not plans.exists():

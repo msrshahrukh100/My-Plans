@@ -21,9 +21,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('utility_apps.tasks.urls', namespace="tasks")),
-
+    url(r'^', include('mainapp.urls', namespace="mainapp")),
     # from the utility apps
+    url(r'^tasks/', include('utility_apps.tasks.urls', namespace="tasks")),
     url(r'emotion-tracker/', include('utility_apps.emotion_tracker.urls', namespace="emotionapp")),
     url(r'gym-tracker/', include('utility_apps.gym_tracker.urls', namespace="gymapp")),
 ]

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     
 
     # utility apps
+    'mainapp',
     'utility_apps.emotion_tracker',
     'utility_apps.tasks',
     'utility_apps.gym_tracker',
@@ -65,7 +66,7 @@ ROOT_URLCONF = 'scheduler.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
