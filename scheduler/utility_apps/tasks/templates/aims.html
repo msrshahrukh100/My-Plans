@@ -1,0 +1,7 @@
+{% load markdown_deux_tags %}
+
+<div class="collection">
+{% for aim in aims %}
+	<a href="#!" class="collection-item">{{ aim.text|markdown }}</a>
+{% endfor %}
+</div>

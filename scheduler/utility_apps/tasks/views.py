@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.decorators import login_required
-from .models import Schedule, Task, TimeBoundTasks, TimeBoundTasksSubtask
+from .models import Schedule, Task, TimeBoundTasks, TimeBoundTasksSubtask, Aims
 from django.utils.timezone import datetime
 
 from rest_framework.views import APIView
@@ -108,6 +108,11 @@ def change_status(request, id=None):
 	
 def get_todays_score(request):
 	return JsonResponse ({"data":get_previous_ndays_data(request.user, 0)})
+
+def get_aims(request):
+	aims = Aims.objects.filter(user=request.user)
+	return render(request, 'aims.html', {'aims':aims})
+
 
 class AnalysisData(APIView):
 

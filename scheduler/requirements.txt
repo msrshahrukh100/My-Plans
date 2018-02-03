@@ -4,10 +4,12 @@ chardet==3.0.4
 Django==1.11.7
 django-autoslug==1.9.3
 django-filter==1.1.0
+django-markdown-deux==1.0.5
 django-taggit==0.22.1
 djangorestframework==3.7.3
 idna==2.6
 Markdown==2.6.9
+markdown2==2.3.5
 olefile==0.44
 Pillow==4.3.0
 pytz==2017.3

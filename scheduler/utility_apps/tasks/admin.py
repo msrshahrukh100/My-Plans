@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from .models import (Task, Schedule, TimeBoundTasks, TimeBoundTasksSubtask)
+from .models import (Task, Schedule, TimeBoundTasks, TimeBoundTasksSubtask, Aims)
 from django.contrib import admin
+
 
 # Register your models here.
 
@@ -25,3 +26,4 @@ admin.site.register(Task, TaskAdmin)
 admin.site.register(Schedule, ScheduleManager)
 admin.site.register(TimeBoundTasks, TimeBoundTasksAdmin)
 admin.site.register(TimeBoundTasksSubtask, TimeBoundTasksSubtaskAdmin)
+admin.site.register(Aims)

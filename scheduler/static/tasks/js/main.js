@@ -14,6 +14,25 @@ $(function(){
 	populate_todays_score();
 
     $('.sidenav').sidenav();
+    $('.modal').modal();
+
+    $('#getaims').on('click', function(){
+    	$.ajax({
+    		type: 'GET',
+    		url: $(this).data('url'),
+    		success: function(data){
+    			$('#aims').html(data);
+    			$('#preloader').hide();
+    		},
+    		fail: function(data){
+    			$('#preloader').hide();
+    			M.toast({html: 'Network Error'});
+    		},
+    		beforeSend: function(){
+    			$('#preloader').show();
+    		}
+    	})
+    });
     
 	$('.task').on('change', function(){
 		$.ajax({

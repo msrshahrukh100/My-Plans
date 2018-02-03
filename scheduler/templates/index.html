@@ -18,6 +18,12 @@
       <div class="nav-wrapper">
         <a href="/" class="brand-logo center">My Plans</a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger button-collapse"><i class="material-icons">menu</i></a>
+        <ul class="right">
+          <li>
+            <a id="getaims" data-url="{% url 'tasks:get_aims' %}" class="waves-effect waves-light btn modal-trigger" href="#modal1">Aims</a>
+          </li>
+        </ul>
+
         <ul class="left hide-on-med-and-down">
           <li><a href="{% url 'tasks:history' %}">History</a></li>
           <li><a href="{% url 'tasks:analysis' %}">Analyze</a></li>
@@ -33,11 +39,23 @@
           <li><a href="{% url 'emotionapp:emotion' %}">Emotions</a></li>
           <li><a href="{% url 'gymapp:gymhome' %}">Gym</a></li>
           <li><a href="{% url 'tasks:time_bound_tasks' %}">Tbt's</a></li>
-
         </ul>
       </div>
     </nav>
-          
+    
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4 class="center">My Aims</h4>
+        <p id="aims">
+          {% include 'preloader.html' %}
+        </p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+      </div>
+    </div>
+
+
     {% block content %}
     <h2 class="center">{{ date|date:"l d M, Y" }}</h2>
     <div class="row">

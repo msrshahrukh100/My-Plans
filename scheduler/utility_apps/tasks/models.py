@@ -8,6 +8,7 @@ from django.utils import timezone
 from django.db.models.signals import pre_save
 from django.core.urlresolvers import reverse
 from django.utils import timezone
+
 # Create your models here.
 
 
@@ -106,6 +107,14 @@ class Schedule(models.Model):
 
 	def __str__(self):
 		return str(self.task)
+
+
+class Aims(models.Model):
+	user = models.ForeignKey(User, related_name="useraims")
+	text = models.TextField()
+
+	def __str__(self):
+		return self.user.first_name
 
 
 
