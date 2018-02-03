@@ -90,3 +90,5 @@ class ProgramExcerciseMap(models.Model):
 	def __str__(self):
 		return str(self.id)
 
+	ordering = "weekday"
+
