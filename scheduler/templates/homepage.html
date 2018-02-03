@@ -4,6 +4,8 @@
 {% block title %} Welcome to Homepage | {{ request.user }} {% endblock %}
 
 {% block content %}
+
+<div class="desktop-view hide-on-med-and-down">
  <div class="row container">
     <div class="col s12 m6 l6">
         <a href="{% url 'tasks:daily_tasks' %}">
@@ -14,8 +16,7 @@
 				</div>
 				<div class="card-content">
 					<p>
-				  	I am a very simple card. I am good at containing small bits of information.
-				  I am convenient because I require little markup to use effectively.
+				  		These are the tasks you do on a daily basis. Keep a track of all the tasks that must be done in a day
 					</p>
 				</div>
 			</div>
@@ -30,8 +31,7 @@
 				</div>
 				<div class="card-content">
 					<p>
-				  	I am a very simple card. I am good at containing small bits of information.
-				  I am convenient because I require little markup to use effectively.
+				  		Analyze your success by looking into how you performed on your daily activities over the last 7, 30 and all days
 					</p>
 				</div>
 			</div>
@@ -49,8 +49,7 @@
 				</div>
 				<div class="card-content">
 					<p>
-				  	I am a very simple card. I am good at containing small bits of information.
-				  I am convenient because I require little markup to use effectively.
+				  		See how you handled your emotions by looking into how you handled them for the past days
 					</p>
 				</div>
 			</div>
@@ -65,8 +64,7 @@
 				</div>
 				<div class="card-content">
 					<p>
-				  	I am a very simple card. I am good at containing small bits of information.
-				  I am convenient because I require little markup to use effectively.
+						Take a note of the emotion by mentioning how you felt before and after, after doing a certain activity
 					</p>
 				</div>
 			</div>
@@ -84,8 +82,7 @@
 				</div>
 				<div class="card-content">
 					<p>
-				  	I am a very simple card. I am good at containing small bits of information.
-				  I am convenient because I require little markup to use effectively.
+				  		Track your Gym workouts
 					</p>
 				</div>
 			</div>
@@ -100,8 +97,7 @@
 				</div>
 				<div class="card-content">
 					<p>
-				  	I am a very simple card. I am good at containing small bits of information.
-				  I am convenient because I require little markup to use effectively.
+						Read your FR scripts and practice
 					</p>
 				</div>
 			</div>
@@ -109,7 +105,62 @@
     </div>
 
   </div>
+   <div class="row container">
+    <div class="col s12 m6 l6">
+        <a href="{% url 'tasks:time_bound_tasks' %}">
+			<div class="card">
+				<div class="card-image">
+				  <img height="250" width="100" src="{% static 'images/analysis.jpeg' %}">
+				  <span class="card-title">Time Bound Tasks</span>
+				</div>
+				<div class="card-content">
+					<p>
+				  		Your time bound tasks
+					</p>
+				</div>
+			</div>
+		</a>
+    </div>
+  </div>
 
+</div>
+<div class="med-and-mob-view show-on-medium-and-down">
+	<div class="row center" style="padding-top: 50px;">
+		<div class="col s12">
+			<a href="{% url 'tasks:daily_tasks' %}" class="waves-effect waves-light btn"><i class="material-icons left">format_list_numbered</i>Daily Tasks</a>
+		</div>
+	</div>
+	<div class="row center">
+		<div class="col s12">
+			<a href="{% url 'tasks:analysis' %}" class="waves-effect waves-light btn"><i class="material-icons left">equalizer</i>Analyze</a>
+		</div>	
+	</div>
+	<div class="row center">
+		<div class="col s12">
+			<a href="{% url 'emotionapp:emotion' %}" class="waves-effect waves-light btn"><i class="material-icons left">sentiment_very_satisfied</i>Your Emotions</a>
+		</div>
+	</div>
+	<div class="row center">
+		<div class="col s12">
+			<a href="{% url 'emotionapp:add_emotion' %}" class="waves-effect waves-light btn"><i class="material-icons left">subject</i>Journal Emotion</a>
+		</div>		
+	</div>
+	<div class="row center">
+		<div class="col s12">
+			<a href="{% url 'gymapp:gymhome' %}" class="waves-effect waves-light btn"><i class="material-icons left">fitness_center</i>Hit the Gym</a>
+		</div>
+	</div>
+	<div class="row center">
+		<div class="col s12">
+			<a href="{% url 'emotionapp:read_frc_scripts' %}" class="waves-effect waves-light btn"><i class="material-icons left">event_note</i>FRC scripts</a>
+		</div>	
+	</div>
+	<div class="row center">
+		<div class="col s12">
+			<a href="{% url 'tasks:time_bound_tasks' %}" class="waves-effect waves-light btn"><i class="material-icons left">alarm_on</i>Time Bound Tasks</a>
+		</div>	
+	</div>
+</div>
 
 {% endblock %}
 
