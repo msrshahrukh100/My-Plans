@@ -84,6 +84,7 @@ def save_exercise(sender, instance, **kwargs):
 class ProgramExcerciseMap(models.Model):
 	program = models.ForeignKey(Program, related_name="getexcercises")
 	weekday = models.IntegerField(default=1)
+	day_name = models.CharField(max_length=255, default="Chest Day")
 	excercises = models.ManyToManyField(Exercise)
 
 	def __str__(self):

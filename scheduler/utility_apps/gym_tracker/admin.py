@@ -12,9 +12,14 @@ class ExerciseAdmin(admin.ModelAdmin):
 	list_editable = ['order_of_performing']
 	list_filter = ['muscle_group']
 
+class ProgramExerciseMapAdmin(admin.ModelAdmin):
+	model = ProgramExcerciseMap
+	list_display = ['program', 'day_name', 'weekday']
+	list_editable = ['day_name' ,'weekday']
+
 admin.site.register(Exercise, ExerciseAdmin)
 admin.site.register(Program)
-admin.site.register(ProgramExcerciseMap)
+admin.site.register(ProgramExcerciseMap, ProgramExerciseMapAdmin)
 admin.site.register(UserProgramMap)
 
 
