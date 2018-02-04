@@ -114,7 +114,7 @@ class Aims(models.Model):
 	text = models.TextField()
 
 	def __str__(self):
-		return self.user.first_name
+		return str(self.user)
 
 
 
