@@ -15,7 +15,8 @@ $(function(){
 
     $('.sidenav').sidenav();
     $('.modal').modal();
-
+    $('.carousel').carousel();
+    
     $('#getaims').on('click', function(){
     	$.ajax({
     		type: 'GET',

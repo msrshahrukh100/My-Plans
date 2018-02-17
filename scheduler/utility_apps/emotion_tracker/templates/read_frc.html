@@ -1,10 +1,40 @@
 {% extends "index.html" %}
 {% load static %}
+{% load emotion_tracker_extras %}
 
 {% block title %} Read All FRC scripts | {{ request.user }} {% endblock %}
 
 {% block content %}
+{% with frc_scripts|get_random as practise_script %}
+<div class="container">
+	<ul class="collection">
+		<li class="collection-item avatar">
+		  <i class="material-icons circle">folder</i>
+		  <span class="title"><strong>Face It Statement</strong></span>
+		  <p>
+		  	{{ practise_script.face_it_statement|linebreaks }}
+		  </p>
+		</li>
+		<li class="collection-item avatar">
+		  <i class="material-icons circle green">insert_chart</i>
+		  <span class="title"><strong>Replace It Statement</strong></span>
+		  <p>
+		  	{{ practise_script.replace_it_statement|linebreaks }}
+		  </p>
+		</li>
+		<li class="collection-item avatar">
+		  <i class="material-icons circle red">play_arrow</i>
+		  <span class="title"><strong>Connect Statement</strong></span>
+		  <p>
+		  	{{ practise_script.connect_statement|linebreaks }}
+		  </p>
+		</li>
+	</ul>
+</div>
+{% endwith %}
 
+<div class="divider"></div>
+<h4 class="center">All FRC scripts</h4>
 {% for frc_script in frc_scripts %}
  <div class="row container">
     <div class="col s12 m10 l10 offset-l1 offset-m1">
