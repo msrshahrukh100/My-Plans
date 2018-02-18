@@ -117,4 +117,13 @@ class Aims(models.Model):
 		return str(self.user)
 
 
+class Timeline(models.Model):
+	user = models.ForeignKey(User, related_name="usertimeline")
+	text = models.TextField()
+	date = models.DateTimeField()
+
+	def __str__(self):
+		return str(self.user)
+
+
 

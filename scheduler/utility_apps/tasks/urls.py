@@ -8,13 +8,15 @@ from .views import (daily_tasks,
 	time_bound_tasks,
 	change_tbt_status,
     change_tbt_subtask_done,
-    get_aims)
+    get_aims,
+    timeline)
 
 
 urlpatterns = [
     url(r'^daily-tasks/$', daily_tasks, name="daily_tasks" ),
     url(r'^change-status/(?P<id>[0-9]+)$', change_status, name="change_status" ),
     url(r'^history/$', history, name="history"),
+    url(r'^timeline/$', timeline, name="timeline"),
     url(r'^time-bound-tasks/$', time_bound_tasks, name="time_bound_tasks"),
     url(r'^your-analysis/$', analysis, name="analysis" ),
     url(r'^get-todays-score/$', get_todays_score, name="get_todays_score" ),

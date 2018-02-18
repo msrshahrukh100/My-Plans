@@ -121,6 +121,21 @@
 			</div>
 		</a>
     </div>
+    <div class="col s12 m6 l6">
+        <a href="{% url 'tasks:timeline' %}">
+			<div class="card">
+				<div class="card-image">
+				  <img height="250" width="100" src="{% static 'images/analysis.jpeg' %}">
+				  <span class="card-title">Timeline</span>
+				</div>
+				<div class="card-content">
+					<p>
+				  		Your life timeline
+					</p>
+				</div>
+			</div>
+		</a>
+    </div>
   </div>
 
 </div>
@@ -158,6 +173,11 @@
 	<div class="row center">
 		<div class="col s12">
 			<a href="{% url 'tasks:time_bound_tasks' %}" class="waves-effect waves-light btn"><i class="material-icons left">alarm_on</i>Time Bound Tasks</a>
+		</div>	
+	</div>
+	<div class="row center">
+		<div class="col s12">
+			<a href="{% url 'tasks:timeline' %}" class="waves-effect waves-light btn"><i class="material-icons left">alarm_on</i>Timeline</a>
 		</div>	
 	</div>
 </div>

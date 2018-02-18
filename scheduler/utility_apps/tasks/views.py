@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.decorators import login_required
-from .models import Schedule, Task, TimeBoundTasks, TimeBoundTasksSubtask, Aims
+from .models import Schedule, Task, TimeBoundTasks, TimeBoundTasksSubtask, Aims, Timeline
 from django.utils.timezone import datetime
 
 from rest_framework.views import APIView
@@ -15,7 +15,6 @@ from api.utils import get_data_of_user, get_previous_ndays_data, get_color_from_
 # Create your views here.
 @login_required(login_url='admin/')
 def daily_tasks(request):
-
 	plans = Schedule.objects.filter(user=request.user, date=datetime.today())
 	if not plans.exists():
 		for task in Task.objects.all():
@@ -92,6 +91,15 @@ def analysis(request):
 	"user_data_forever" : get_data_of_user(request.user)
 	}
 	return render(request, "analysis.html", context)
+
+
+@login_required
+def timeline(request):
+	timeline_objects = Timeline.objects.filter(user=request.user)
+	context = {
+	"timeline_objects" : timeline_objects
+	}
+	return render(request, "timeline.html", context)
 
 
 @login_required
