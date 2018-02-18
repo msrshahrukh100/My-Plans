@@ -95,7 +95,7 @@ def analysis(request):
 
 @login_required
 def timeline(request):
-	timeline_objects = Timeline.objects.filter(user=request.user)
+	timeline_objects = Timeline.objects.filter(user=request.user).order_by('date')
 	context = {
 	"timeline_objects" : timeline_objects
 	}
