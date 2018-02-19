@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
@@ -45,6 +46,7 @@ class EmotionJournal(models.Model):
 
 
 class FRCScript(models.Model):
+	trigger = models.TextField()
 	face_it_statement = models.TextField()
 	replace_it_statement = models.TextField()
 	connect_statement = models.TextField()

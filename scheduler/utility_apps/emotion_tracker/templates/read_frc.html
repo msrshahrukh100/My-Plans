@@ -10,7 +10,14 @@
 	<ul class="collection">
 		<li class="collection-item avatar">
 			<span class="new badge" data-badge-caption="{{ practise_script.created_at|date:'P l d M, Y' }}"></span>
-		  <i class="material-icons circle">folder</i>
+		  <i class="material-icons red circle">report</i>
+		  <span class="title"><strong>Trigger</strong></span>
+		  <p>
+		  	{{ practise_script.trigger|linebreaks }}
+		  </p>
+		</li>
+		<li class="collection-item avatar">
+		  <i class="material-icons blue circle">folder</i>
 		  <span class="title"><strong>Face It Statement</strong></span>
 		  <p>
 		  	{{ practise_script.face_it_statement|linebreaks }}
@@ -24,7 +31,7 @@
 		  </p>
 		</li>
 		<li class="collection-item avatar">
-		  <i class="material-icons circle red">play_arrow</i>
+		  <i class="material-icons circle orange">play_arrow</i>
 		  <span class="title"><strong>Connect Statement</strong></span>
 		  <p>
 		  	{{ practise_script.connect_statement|linebreaks }}
@@ -43,6 +50,13 @@
 			<span class="new badge" data-badge-caption="{{ frc_script.created_at|date:'P l d M, Y' }}"></span>
 			<div class="card-content">
 				 <ul class="collection">
+				 	<li class="collection-item avatar">
+				      <i class="material-icons red circle">report</i>
+				      <span class="title"><strong>Trigger</strong></span>
+				      <p>
+				      	{{ frc_script.trigger|linebreaks }}
+				      </p>
+				    </li>
 				    <li class="collection-item avatar">
 				      <i class="material-icons circle">folder</i>
 				      <span class="title"><strong>Face It Statement</strong></span>
@@ -58,7 +72,7 @@
 				      </p>
 				    </li>
 				    <li class="collection-item avatar">
-				      <i class="material-icons circle red">play_arrow</i>
+				      <i class="material-icons circle orange">play_arrow</i>
 				      <span class="title"><strong>Connect Statement</strong></span>
 				      <p>
 				      	{{ frc_script.connect_statement|linebreaks }}
