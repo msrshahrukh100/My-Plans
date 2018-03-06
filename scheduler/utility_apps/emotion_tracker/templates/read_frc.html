@@ -41,6 +41,47 @@
 </div>
 {% endwith %}
 
+
+  <!-- Modal Trigger -->
+  <div class="center" style="padding-bottom: 20px;">
+	  <a data-url="{% url 'emotionapp:frc_scripts_streak' %}" class="waves-effect waves-light btn" id="btn-read-frc">Done</a>
+  </div>
+
+ 		<div class="row" style="display: none;" id="run-streak-box">
+			<div class="col s5">
+				<i class="medium green-text material-icons prefix right">directions_run</i>
+			</div>
+			<div class="col s7 green-text">
+				<p class="left">Your current run streak is 
+					<strong style="font-size: 25px;"><span id="run-streak"></span> days</strong> 
+				</p>
+			</div>
+		</div>
+		<div class="row" style="display: none;" id="message-box">
+			<div class="col s5">
+				<i class="medium green-text material-icons prefix right">thumb_up</i>
+			</div>
+			<div class="col s7 green-text">
+				<p class="left" id="message"></p>
+			</div>
+		</div>	  	
+ 
+  <!-- Modal Structure -->
+ <!--  <div id="readfrc" class="modal">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div> -->
+
+  <div id="frc-info" class="center">
+  	
+  </div>
+
+
 <div class="divider"></div>
 <h4 class="center">All FRC scripts</h4>
 {% for frc_script in frc_scripts %}

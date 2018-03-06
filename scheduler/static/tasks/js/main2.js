@@ -16,4 +16,25 @@ $(function(){
 
 	})
   // $('.chips-autocomplete').chips();
+
+  $('#btn-read-frc').on('click', function(){
+  	$.ajax({
+			url: $(this).attr('data-url'),
+			type: 'GET',
+			success: function(data){
+				$('#run-streak-box').show()
+				$('#run-streak').html(data["streak_count"])
+				if(data["status"] == "2"){
+					$('#message-box').show()
+					$('#message').html(data["msg"] + data["today_times"])
+				}
+				else{
+					M.toast({html: data['msg'] + data["today_times"]})
+				}
+				
+			}
+		})
+
+  });
+
 });

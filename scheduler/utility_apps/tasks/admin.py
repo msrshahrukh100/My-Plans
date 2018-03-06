@@ -22,9 +22,13 @@ class TimeBoundTasksSubtaskAdmin(admin.ModelAdmin):
 	list_display = ['user', 'tbt', 'due_date', 'subtask']
 
 
+class TimelineAdmin(admin.ModelAdmin):
+	list_display = ["text", "date"]
+
+
 admin.site.register(Task, TaskAdmin)
 admin.site.register(Schedule, ScheduleManager)
 admin.site.register(TimeBoundTasks, TimeBoundTasksAdmin)
 admin.site.register(TimeBoundTasksSubtask, TimeBoundTasksSubtaskAdmin)
 admin.site.register(Aims)
-admin.site.register(Timeline)
+admin.site.register(Timeline, TimelineAdmin)

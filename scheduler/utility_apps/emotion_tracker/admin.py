@@ -11,6 +11,9 @@ class EmotionsAdmin(admin.ModelAdmin):
 	list_editable = ['emoticon', 'color']
 
 
+class FRCScriptAdmin(admin.ModelAdmin):
+	list_display = ['trigger', 'created_at']
+
 admin.site.register(EmotionJournal)
 admin.site.register(Emotions, EmotionsAdmin)
-admin.site.register(FRCScript)
+admin.site.register(FRCScript, FRCScriptAdmin)
