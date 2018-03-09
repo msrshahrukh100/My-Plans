@@ -18,13 +18,13 @@ class Program(models.Model):
 	def __str__(self):
 		return self.program_name
 
-	def get_all_excercises_for_the_day(self):
-		day = int(timezone.now().day) % self.number_of_days
+	def get_all_excercises_for_the_day(self, days_delta=0):
+		day = int(timezone.now().day + days_delta) % self.number_of_days
 		day_exercises = self.getexcercises.all().filter(weekday=day).first()
 		if day_exercises:
-			return day_exercises.excercises.all().order_by('order_of_performing')
-		else :
-			return None
+			return (day_exercises, day_exercises.excercises.all().order_by('order_of_performing'))
+		else:
+			return None, None
 
 
 class UserProgramMap(models.Model):
@@ -84,6 +84,7 @@ def save_exercise(sender, instance, **kwargs):
 class ProgramExcerciseMap(models.Model):
 	program = models.ForeignKey(Program, related_name="getexcercises")
 	weekday = models.IntegerField(default=1)
+	day_of_week = models.CharField(max_length=100, default="Monday")
 	day_name = models.CharField(max_length=255, default="Chest Day")
 	excercises = models.ManyToManyField(Exercise)
 

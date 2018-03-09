@@ -37,4 +37,17 @@ $(function(){
 
   });
 
+
+    $('.change-delta-days').on('click', function(){
+  	$.ajax({
+			url: $(this).attr('data-url'),
+			type: 'GET',
+			success: function(data){
+				location.reload()
+
+			}
+		})
+
+  });
+
 });
